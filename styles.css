@@ -32,7 +32,6 @@
   .fv {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
   
   .resume {
@@ -225,7 +224,7 @@
   }
   
   .additional-info__education {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
   
   .additional-info__education-header {
@@ -252,7 +251,7 @@
   }
   
   .additional-info__languages {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
   }
   
   .additional-info__languages-header {
