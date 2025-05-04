@@ -1,5 +1,6 @@
 const avatar = document.querySelector(".contact-info__avatar");
 const bodyTag = document.querySelector("body");
+const mainHeader = document.querySelector(".contact-info__header");
 
 const bodyStyle = getComputedStyle(bodyTag);
 
@@ -25,6 +26,8 @@ const hoverVars = {
   "--dark-background-color": "#230e11",
 };
 
+const glitchClasses = ["layers", "glitch"];
+
 const primaryAvatarImg = avatar.src;
 const hoverAvatarImg = "assets/johnny.png";
 
@@ -32,6 +35,9 @@ avatar.addEventListener("mouseover", () => {
   for (const [key, value] of Object.entries(hoverVars)) {
     bodyTag.style.setProperty(key, value);
   }
+  glitchClasses.forEach((glitchClass) => {
+    mainHeader.classList.add(glitchClass);
+  });
   avatar.src = hoverAvatarImg;
 });
 
@@ -39,5 +45,8 @@ avatar.addEventListener("mouseleave", () => {
   for (const [key, value] of Object.entries(cssVars)) {
     bodyTag.style.setProperty(key, value);
   }
+  glitchClasses.forEach((glitchClass) => {
+    mainHeader.classList.remove(glitchClass);
+  });
   avatar.src = primaryAvatarImg;
 });
