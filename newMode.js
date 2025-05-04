@@ -1,6 +1,7 @@
 const avatar = document.querySelector(".contact-info__avatar");
 const bodyTag = document.querySelector("body");
 const mainHeader = document.querySelector(".contact-info__header");
+const glitchTextTags = ["h3", "span", "p", "li"];
 
 const bodyStyle = getComputedStyle(bodyTag);
 
@@ -26,27 +27,39 @@ const hoverVars = {
   "--dark-background-color": "#230e11",
 };
 
-const glitchClasses = ["layers", "glitch"];
+const glitchHeaderClasses = ["layers", "glitch"];
+const glitchTextClass = "glitch-text";
+
+const glitchTextElements = glitchTextTags.flatMap((tag) =>
+  Array.from(document.querySelectorAll(tag))
+);
 
 const primaryAvatarImg = avatar.src;
 const hoverAvatarImg = "assets/johnny.png";
 
-avatar.addEventListener("mouseover", () => {
-  for (const [key, value] of Object.entries(hoverVars)) {
+function setCSSVars(vars) {
+  for (const [key, value] of Object.entries(vars)) {
     bodyTag.style.setProperty(key, value);
   }
-  glitchClasses.forEach((glitchClass) => {
-    mainHeader.classList.add(glitchClass);
-  });
+}
+
+function toggleGlitchEffects(enable) {
+  glitchHeaderClasses.forEach((cls) =>
+    mainHeader.classList.toggle(cls, enable)
+  );
+  glitchTextElements.forEach((el) =>
+    el.classList.toggle(glitchTextClass, enable)
+  );
+}
+
+avatar.addEventListener("mouseover", () => {
+  setCSSVars(hoverVars);
+  toggleGlitchEffects(true);
   avatar.src = hoverAvatarImg;
 });
 
 avatar.addEventListener("mouseleave", () => {
-  for (const [key, value] of Object.entries(cssVars)) {
-    bodyTag.style.setProperty(key, value);
-  }
-  glitchClasses.forEach((glitchClass) => {
-    mainHeader.classList.remove(glitchClass);
-  });
+  setCSSVars(cssVars);
+  toggleGlitchEffects(false);
   avatar.src = primaryAvatarImg;
 });
